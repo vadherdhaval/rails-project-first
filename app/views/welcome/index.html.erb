@@ -10,7 +10,6 @@
       sel.removeAllRanges();
       sel.addRange(range);
     }
-    // Use HiliteColor since some browsers apply BackColor to the whole block
     if (!document.execCommand("HiliteColor", false, colour)) {
       document.execCommand("BackColor", false, colour);
     }
@@ -19,7 +18,6 @@
   function highlight(colour) {
     var range, sel;
     if (window.getSelection) {
-      // IE9 and non-IE
       try {
         if (!document.execCommand("BackColor", false, colour)) {
           makeEditableAndHighlight(colour);
@@ -37,7 +35,7 @@
   }
   function touch_events() {
     document.onmouseup = function(){
-        highlight('yellow');
+        highlight('pink');
     };
   }
   touch_events();
