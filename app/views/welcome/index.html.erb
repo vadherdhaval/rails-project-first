@@ -1,5 +1,50 @@
-<h1>Welcome to the Rails Installer Demo!!!</h1>
-
-<p>yes I did it</p>
-
-<p>You can see more stuff later :)</p>
+<script type = "text/javascript">
+  function makeEditableAndHighlight(colour) {
+    sel = window.getSelection();
+    console.log(sel);
+    if (sel.rangeCount && sel.getRangeAt) {
+      range = sel.getRangeAt(0);
+    }
+    document.designMode = "on";
+    if (range) {
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+    // Use HiliteColor since some browsers apply BackColor to the whole block
+    if (!document.execCommand("HiliteColor", false, colour)) {
+      document.execCommand("BackColor", false, colour);
+    }
+    document.designMode = "off";
+  }
+  function highlight(colour) {
+    var range, sel;
+    if (window.getSelection) {
+      // IE9 and non-IE
+      try {
+        if (!document.execCommand("BackColor", false, colour)) {
+          makeEditableAndHighlight(colour);
+        }
+      } 
+      catch (ex) {
+        makeEditableAndHighlight(colour)
+      }
+    } 
+    else if (document.selection && document.selection.createRange) {
+    // IE <= 8 case
+      range = document.selection.createRange();
+      range.execCommand("BackColor", false, colour);
+    }
+  }
+  function touch_events() {
+    document.onmouseup = function(){
+        highlight('yellow');
+    };
+  }
+  touch_events();
+</script>
+<div id="highlighted">
+    <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a handful of words and they scrambled it to make a type specimen book. It has survived not only five centuries</p>
+    <br/>
+    <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a handful of words and they scrambled it to make a type specimen book. It has survived not only five centuries</p>
+    <br>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a handful of words and they scrambled it to make a type specimen book. It has survived not only five centuries
+</div>
